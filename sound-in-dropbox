@@ -1,0 +1,20 @@
+import com.dropbox.core.DbxRequestConfig;
+import com.dropbox.core.v2.DbxClientV2;
+import java.io.*;
+
+public class main {
+    public static void main(String[] args) {
+        System.out.println("enter temporary tokeh of dropbox, where records will uploads");
+        BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
+        String  ACCESS_TOKEN = null;
+        try {
+            ACCESS_TOKEN = read.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        DbxRequestConfig config = DbxRequestConfig.newBuilder("dropbox/java-tutorial").build();
+        DbxClientV2 client = new DbxClientV2(config, ACCESS_TOKEN);
+        JavaSoundRecorder recorder = new JavaSoundRecorder(client);
+        recorder.recordAudio(10000);
+    }
+}
